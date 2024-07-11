@@ -45,7 +45,7 @@ class keluhcontroller extends Controller
             if ($file = $request->file('file')) {
                 $lokasi = 'images/';
                 $post = $file->getClientOriginalName();
-                $file->move($lokasi, $post);
+                $file->move($lokasi, $post, 's3');
                 $input['file'] = "$post";
             }
 
