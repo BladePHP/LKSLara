@@ -45,7 +45,7 @@ class keluhcontroller extends Controller
 
             if ($file = $request->file('file')) {
                 $post = $file->getClientOriginalName();
-                $lokasi = 'images/';
+                $lokasi = 'images/' . $post;
                 Storage::disk('s3')->put($lokasi, file_get_contents($file));
                 $input['file'] = "$post";
             }
@@ -93,7 +93,7 @@ class keluhcontroller extends Controller
 
             if ($file = $request->file('file')) {
                 $post = $file->getClientOriginalName();
-                $lokasi = 'images/';
+                $lokasi = 'images/' . $post;
                 Storage::disk('s3')->put($lokasi, file_get_contents($file));
                 $input['file'] = "$post";
             }
