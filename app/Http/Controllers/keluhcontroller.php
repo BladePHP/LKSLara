@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\keluhan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class keluhcontroller extends Controller
 {
@@ -43,9 +44,9 @@ class keluhcontroller extends Controller
         $input = $request->all();
 
             if ($file = $request->file('file')) {
-                $lokasi = 'images/';
                 $post = $file->getClientOriginalName();
-                $file->move($lokasi, $post, 's3');
+                $lokasi = 'images/';
+                Storage::disk('s3')->put($lokasi, file_get_contents($file));
                 $input['file'] = "$post";
             }
 
@@ -91,9 +92,9 @@ class keluhcontroller extends Controller
         $input = $request->all();
 
             if ($file = $request->file('file')) {
-                $lokasi = 'images/';
                 $post = $file->getClientOriginalName();
-                $file->move($lokasi, $post);
+                $lokasi = 'images/';
+                Storage::disk('s3')->put($lokasi, file_get_contents($file));
                 $input['file'] = "$post";
             }
 
